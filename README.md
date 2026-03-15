@@ -8,7 +8,7 @@ A lightweight Chrome/Edge browser extension that auto-refreshes the active tab a
 ## Demo
 
 <!-- Replace with your recorded GIF -->
-![Auto Refresher Demo](artifacts/demo.gif)
+![Auto Refresher Demo](artifacts/store/demo.gif)
 
 ## Features
 
@@ -55,7 +55,9 @@ For detailed architecture, implementation plan, security considerations, and tes
 3. Click **Start** — the page will auto-refresh at the specified interval
 4. Click **Stop** to cancel
 
-![Popup Screenshot](artifacts/screenshot.png)
+| Set interval | Click Start | Refreshing | Stop |
+|:---:|:---:|:---:|:---:|
+| ![Before](artifacts/store/before_click.png) | ![After Click](artifacts/store/after_click.png) | ![Running](artifacts/store/after_start.png) | ![Stop](artifacts/store/to_stop.png) |
 
 ## Development
 
