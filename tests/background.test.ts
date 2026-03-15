@@ -19,9 +19,8 @@ beforeEach(() => {
   chromeMock.storage.local.set.mockResolvedValue(undefined);
   chromeMock.storage.local.remove.mockResolvedValue(undefined);
   chromeMock.tabs.reload.mockResolvedValue(undefined);
-  chromeMock.action.setBadgeText.mockResolvedValue(undefined);
-  chromeMock.action.setBadgeBackgroundColor.mockResolvedValue(undefined);
   chromeMock.action.setIcon.mockResolvedValue(undefined);
+  chromeMock.action.setTitle.mockResolvedValue(undefined);
 });
 
 describe("startRefresh", () => {
@@ -37,12 +36,16 @@ describe("startRefresh", () => {
       delayInMinutes: 2,
       periodInMinutes: 2,
     });
-    expect(chromeMock.action.setBadgeText).toHaveBeenCalledWith({
-      text: "2m",
+    expect(chromeMock.action.setIcon).toHaveBeenCalledWith({
+      path: {
+        "16": "icons/icon16-active.png",
+        "48": "icons/icon48-active.png",
+        "128": "icons/icon128-active.png",
+      },
       tabId,
     });
-    expect(chromeMock.action.setBadgeBackgroundColor).toHaveBeenCalledWith({
-      color: "#4CAF50",
+    expect(chromeMock.action.setTitle).toHaveBeenCalledWith({
+      title: "Refreshing every 2 minutes",
       tabId,
     });
   });
@@ -60,8 +63,12 @@ describe("startRefresh", () => {
       `refresh-${tabId}`,
       { delayInMinutes: 10000 / 60000, periodInMinutes: 10000 / 60000 }
     );
-    expect(chromeMock.action.setBadgeText).toHaveBeenCalledWith({
-      text: "10s",
+    expect(chromeMock.action.setIcon).toHaveBeenCalledWith({
+      path: {
+        "16": "icons/icon16-active.png",
+        "48": "icons/icon48-active.png",
+        "128": "icons/icon128-active.png",
+      },
       tabId,
     });
   });
@@ -75,7 +82,18 @@ describe("stopRefresh", () => {
 
     expect(chromeMock.alarms.clear).toHaveBeenCalledWith(`refresh-${tabId}`);
     expect(chromeMock.storage.local.remove).toHaveBeenCalledWith(storageKey(tabId));
-    expect(chromeMock.action.setBadgeText).toHaveBeenCalledWith({ text: "", tabId });
+    expect(chromeMock.action.setIcon).toHaveBeenCalledWith({
+      path: {
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png",
+      },
+      tabId,
+    });
+    expect(chromeMock.action.setTitle).toHaveBeenCalledWith({
+      title: "Auto Refresher",
+      tabId,
+    });
   });
 });
 
@@ -182,7 +200,18 @@ describe("handleTabRemoved", () => {
 
     expect(chromeMock.alarms.clear).toHaveBeenCalledWith("refresh-77");
     expect(chromeMock.storage.local.remove).toHaveBeenCalledWith(storageKey(77));
-    expect(chromeMock.action.setBadgeText).toHaveBeenCalledWith({ text: "", tabId: 77 });
+    expect(chromeMock.action.setIcon).toHaveBeenCalledWith({
+      path: {
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png",
+      },
+      tabId: 77,
+    });
+    expect(chromeMock.action.setTitle).toHaveBeenCalledWith({
+      title: "Auto Refresher",
+      tabId: 77,
+    });
   });
 });
 
@@ -204,8 +233,12 @@ describe("handleStartup", () => {
       delayInMinutes: 5,
       periodInMinutes: 5,
     });
-    expect(chromeMock.action.setBadgeText).toHaveBeenCalledWith({
-      text: "5m",
+    expect(chromeMock.action.setIcon).toHaveBeenCalledWith({
+      path: {
+        "16": "icons/icon16-active.png",
+        "48": "icons/icon48-active.png",
+        "128": "icons/icon128-active.png",
+      },
       tabId,
     });
   });
