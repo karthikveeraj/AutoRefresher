@@ -1,0 +1,2 @@
+Build an extension plug-in to Chrome or Edge Browser which refreshes the active tab web page automatically based on the configuration.
+User may have an option to set the refresh duration such as every X seconds/minutes/hours/days

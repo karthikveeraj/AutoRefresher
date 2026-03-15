@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto Refresher</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Auto Refresher</h1>
+
+    <div class="form-group">
+      <label for="interval">Refresh every</label>
+      <div class="input-row">
+        <input type="number" id="interval" min="1" step="1" value="10" />
+        <select id="unit">
+          <option value="seconds">Seconds</option>
+          <option value="minutes">Minutes</option>
+          <option value="hours">Hours</option>
+          <option value="days">Days</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="error" class="error" hidden></div>
+
+    <div class="button-group">
+      <button id="startBtn" class="btn btn-start">▶ Start</button>
+      <button id="stopBtn" class="btn btn-stop" hidden>■ Stop</button>
+    </div>
+
+    <div id="status" class="status">Inactive</div>
+  </div>
+
+  <script src="popup.js" type="module"></script>
+</body>
+</html>
