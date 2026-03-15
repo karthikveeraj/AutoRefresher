@@ -33,13 +33,13 @@ for (const { src, dest } of filesToCopy) {
 }
 
 // Copy icons
-const iconsDir = path.join(ROOT, "icons");
+const iconsDir = path.join(ROOT, "artifacts", "icons");
 if (fs.existsSync(iconsDir)) {
   const distIcons = path.join(DIST, "icons");
   ensureDir(distIcons);
   for (const file of fs.readdirSync(iconsDir)) {
     copyFile(path.join(iconsDir, file), path.join(distIcons, file));
-    console.log(`  Copied icons/${file} -> dist/icons/${file}`);
+    console.log(`  Copied artifacts/icons/${file} -> dist/icons/${file}`);
   }
 }
 

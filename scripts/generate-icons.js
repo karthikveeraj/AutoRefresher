@@ -4,7 +4,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const ICONS_DIR = path.resolve(__dirname, "..", "icons");
+const ICONS_DIR = path.resolve(__dirname, "..", "artifacts", "icons");
 if (!fs.existsSync(ICONS_DIR)) fs.mkdirSync(ICONS_DIR, { recursive: true });
 
 // --- PNG helpers ---
@@ -169,7 +169,7 @@ for (const { suffix, r, g, b } of variants) {
     const png = createRefreshIcon(size, r, g, b);
     const fp = path.join(ICONS_DIR, `icon${size}${suffix}.png`);
     fs.writeFileSync(fp, png);
-    console.log(`  Generated icons/icon${size}${suffix}.png (${png.length} bytes)`);
+    console.log(`  Generated artifacts/icons/icon${size}${suffix}.png (${png.length} bytes)`);
   }
 }
 console.log("Refresh arrow icons generated successfully.");

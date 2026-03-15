@@ -123,10 +123,11 @@ Refresher/
 │   ├── popup.css               # Popup styles
 │   └── types.ts                # Shared TypeScript interfaces/types
 │
-├── icons/                      # Extension icons
-│   ├── icon16.png              # 16×16 — favicon, toolbar
-│   ├── icon48.png              # 48×48 — extensions page
-│   └── icon128.png             # 128×128 — Chrome Web Store
+├── artifacts/                  # Icons, demo GIF, screenshots, store assets
+│   ├── icons/                  # Extension icons
+│   │   ├── icon16.png          # 16×16 — favicon, toolbar
+│   │   ├── icon48.png          # 48×48 — extensions page
+│   │   └── icon128.png         # 128×128 — Chrome Web Store
 │
 ├── tests/                      # Test files
 │   ├── validation.test.ts      # Input validation & time conversion tests
@@ -305,7 +306,7 @@ This installs TypeScript and Chrome API type definitions.
 
 ### 6.4 Build Process Details
 1. `tsc` compiles `src/background.ts` and `src/popup.ts` → JavaScript in `dist/`
-2. A copy script copies static assets (`manifest.json`, `popup.html`, `popup.css`, `icons/`) into `dist/`
+2. A copy script copies static assets (`manifest.json`, `popup.html`, `popup.css`, `artifacts/icons/`) into `dist/`
 3. The `dist/` folder is a complete, loadable extension
 
 ### 6.5 What `tsconfig.json` Does

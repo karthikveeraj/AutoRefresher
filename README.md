@@ -85,11 +85,10 @@ AutoRefresher/
 │   ├── popup.html           # Popup markup
 │   ├── popup.css            # Popup styles
 │   └── types.ts             # Shared TypeScript types
-├── icons/                   # Extension icons (16/48/128px, active & inactive)
+├── artifacts/               # Icons, demo GIF, screenshots, and store assets
 ├── tests/                   # Jest tests
 ├── scripts/                 # Build helper scripts
 ├── docs/                    # Architecture & design documentation
-├── artifacts/               # Demo GIF and screenshots
 ├── .github/workflows/       # GitHub Actions CI
 ├── manifest.json            # Extension manifest (Manifest V3)
 ├── tsconfig.json            # TypeScript config
