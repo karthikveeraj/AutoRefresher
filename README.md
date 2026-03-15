@@ -88,9 +88,13 @@ AutoRefresher/
 ├── icons/                   # Extension icons (16/48/128px, active & inactive)
 ├── tests/                   # Jest tests
 ├── scripts/                 # Build helper scripts
+├── docs/                    # Architecture & design documentation
+├── artifacts/               # Demo GIF and screenshots
+├── .github/workflows/       # GitHub Actions CI
 ├── manifest.json            # Extension manifest (Manifest V3)
 ├── tsconfig.json            # TypeScript config
 ├── jest.config.js           # Jest config
+├── LICENSE                  # MIT License
 └── dist/                    # Build output (git-ignored)
 ```
 
