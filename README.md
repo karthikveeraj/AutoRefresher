@@ -28,7 +28,7 @@ For detailed architecture, implementation plan, security considerations, and tes
 
 ### From Chrome Web Store / Edge Add-ons
 
-> Coming soon
+> Edge Add-ons: Under review — link coming soon
 
 ### From source (Developer mode)
 
