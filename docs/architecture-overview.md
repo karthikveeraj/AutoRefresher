@@ -37,55 +37,50 @@ Build a browser extension for Chrome and Microsoft Edge that automatically refre
 
 ### 2.1 High-Level Architecture
 
-```
-┌──────────────────────────────────────────────────┐
-│                   Browser Tab                     │
-│                 (Web Page)                        │
-│                                                   │
-│   ← chrome.tabs.reload(tabId) ──────────┐        │
-└──────────────────────────────────────────┼────────┘
-                                           │
-┌──────────────────────────────────────────┼────────┐
-│              Service Worker              │        │
-│            (background.ts)               │        │
-│                                          │        │
-│  ┌─────────────┐    ┌────────────────┐   │        │
-│  │ chrome.alarms│    │ setTimeout     │   │        │
-│  │ (≥ 60s)     │    │ (< 60s)        │   │        │
-│  └──────┬──────┘    └───────┬────────┘   │        │
-│         │                   │            │        │
-│         └───────┬───────────┘            │        │
-│                 │                                 │
-│          onAlarm / onTimeout                      │
-│                 │                                 │
-│          tabs.reload(tabId) ─────────────┘        │
-│                                                   │
-│  ┌──────────────────────────────────┐             │
-│  │ chrome.storage.local             │             │
-│  │ { tabId: { interval, unit, ... }}│             │
-│  └──────────────────────────────────┘             │
-│                                                   │
-│  ┌──────────────────────────────────┐             │
-│  │ chrome.tabs.onRemoved            │             │
-│  │ → cleanup alarm + storage        │             │
-│  └──────────────────────────────────┘             │
-└───────────────────────────────────────────────────┘
-         ▲               │
-         │ messages       │ messages
-         │ (start/stop)   │ (status)
-         │               ▼
-┌───────────────────────────────────────────────────┐
-│                  Popup UI                          │
-│              (popup.html/ts)                       │
-│                                                    │
-│  ┌─────────────────────────────────────────┐      │
-│  │  [ Interval Input ] [ Unit Dropdown ▼ ] │      │
-│  │                                         │      │
-│  │  [ ▶ Start  /  ■ Stop ]                │      │
-│  │                                         │      │
-│  │  Status: Refreshing every 30 seconds    │      │
-│  └─────────────────────────────────────────┘      │
-└───────────────────────────────────────────────────┘
+```mermaid
+graph TB
+    subgraph BrowserTab["Browser Tab"]
+        WebPage["Web Page"]
+    end
+
+    subgraph PopupUI["Popup UI (popup.html / popup.ts)"]
+        Input["Interval Input &nbsp; | &nbsp; Unit Dropdown"]
+        Buttons["▶ Start &nbsp; / &nbsp; ■ Stop"]
+        Status["Status: Refreshing every 30 seconds"]
+    end
+
+    subgraph ServiceWorker["Service Worker (background.ts)"]
+        direction TB
+        Alarms["chrome.alarms &nbsp; (≥ 60s)"]
+        SetTimeout["setTimeout &nbsp; (< 60s)"]
+        TimerFire["onAlarm / onTimeout"]
+        Storage["chrome.storage.local"]
+        Cleanup["chrome.tabs.onRemoved → cleanup"]
+    end
+
+    Input --> Buttons --> Status
+
+    PopupUI -- "start / stop message" --> ServiceWorker
+    ServiceWorker -- "status response" --> PopupUI
+
+    Alarms --> TimerFire
+    SetTimeout --> TimerFire
+    TimerFire -- "chrome.tabs.reload(tabId)" --> WebPage
+
+    style BrowserTab fill:#1565c0,stroke:#0d47a1,color:#fff
+    style WebPage fill:#1976d2,stroke:#0d47a1,color:#fff
+
+    style ServiceWorker fill:#e65100,stroke:#bf360c,color:#fff
+    style Alarms fill:#f57c00,stroke:#e65100,color:#fff
+    style SetTimeout fill:#f57c00,stroke:#e65100,color:#fff
+    style TimerFire fill:#ef6c00,stroke:#bf360c,color:#fff
+    style Storage fill:#f57c00,stroke:#e65100,color:#fff
+    style Cleanup fill:#f57c00,stroke:#e65100,color:#fff
+
+    style PopupUI fill:#2e7d32,stroke:#1b5e20,color:#fff
+    style Input fill:#388e3c,stroke:#1b5e20,color:#fff
+    style Buttons fill:#388e3c,stroke:#1b5e20,color:#fff
+    style Status fill:#388e3c,stroke:#1b5e20,color:#fff
 ```
 
 ### 2.2 Component Responsibilities
