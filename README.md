@@ -1,7 +1,7 @@
 # Auto Refresher
 
 [![Build](https://github.com/karthikveeraj/AutoRefresher/actions/workflows/build.yml/badge.svg)](https://github.com/karthikveeraj/AutoRefresher/actions/workflows/build.yml)
-[![Version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgist.githubusercontent.com%2Fkarthikveeraj%2FBADGE_GIST_ID%2Fraw%2Fauto-refresher-badge.json&label=version&query=%24.message&color=blue)](https://github.com/karthikveeraj/AutoRefresher)
+[![Version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgist.githubusercontent.com%2Fkarthikveeraj%2F20a6128c24b9b1d16b321678e37952cd%2Fraw%2Fauto-refresher-badge.json&label=version&query=%24.message&color=blue)](https://github.com/karthikveeraj/AutoRefresher)
 
 A lightweight Chrome/Edge browser extension that auto-refreshes the active tab at a configurable interval. Built with Manifest V3 and TypeScript, with zero runtime dependencies.
 

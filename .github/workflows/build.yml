@@ -31,7 +31,7 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         with:
           auth: ${{ secrets.GIST_SECRET }}
-          gistID: ${{ vars.BADGE_GIST_ID }}
+          gistID: 20a6128c24b9b1d16b321678e37952cd
           filename: auto-refresher-badge.json
           label: version
           message: v${{ steps.version.outputs.version }}
